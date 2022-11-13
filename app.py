@@ -63,16 +63,10 @@ class App(Tk):
         self.outputEntry = outputEntry
         self.resultsFrame = resultsFrame
 
-        # delete these
-        correctAnsEntry.insert(0, 'D:\\ACA\Projects\\05-mcq-marking\\research\\correct-answers.csv')
-        ansSheetEntry.insert(0, 'D:\\ACA\Projects\\05-mcq-marking\\research\\grade-8-mcq-answer-sheets-2.pdf')
-        outputEntry.insert(0, 'C:\\Users\\Avishka\\Desktop')
-
     def browseFiles(self, entry, fileTypeIndices=[], openFile=True):
         if openFile:
             fileTypesMap = {0:("Text files", "*.txt*"), 1:("CSV files", "*.csv*"), 2:("PDF files", "*.pdf*"), -1:("all files", "*.*")}
             filetypes = list(map(lambda index: fileTypesMap[index], fileTypeIndices))
-            # filetypes.append(fileTypesMap[-1])
             text = filedialog.askopenfilename(title = "Select a File", filetypes = filetypes)
         else:
             text = filedialog.askdirectory(title = "Select a Folder")
@@ -85,7 +79,6 @@ class App(Tk):
             correct_answers_path, answer_sheet_pdf_path, names_list_path, output_path = self.correctAnsEntry.get(), self.ansSheetEntry.get(), self.nameLstEntry.get(), self.outputEntry.get()
             assert correct_answers_path != "", "Correct answers csv file must not be empty"
             assert answer_sheet_pdf_path != "", "Answer sheet pdf file must not be empty"
-            assert output_path != "", "Output path must not be empty"
             
             results = markMCQ(correct_answers_path, answer_sheet_pdf_path, names_list_path, output_path)
             self.show_results(results)

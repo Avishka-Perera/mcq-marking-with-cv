@@ -168,7 +168,8 @@ def markMCQ(correct_answers_path, answer_sheet_pdf_path, names_list_path, output
         else:
             results.append((selected_answers, correct, score))
 
-    exportData(results, f"{output_path}/results.csv")
+    if output_path != "":
+        exportData(results, f"{output_path}/results.csv")
     
     return results
         
